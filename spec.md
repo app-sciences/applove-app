@@ -129,7 +129,7 @@
 
 ## 6. Open / TBD Items
 
-- [ ] Blockchain selection and architecture
+- [x] Blockchain selection: EVM-compatible — Coinbase Base or Polygon
 - [ ] Token economics and stake pricing model
 - [ ] App store oracle implementation (API-based, Chainlink, custom)
 - [ ] Legal/compliance framework for securities
@@ -144,7 +144,7 @@
 |-------|-----------|
 | Frontend | React / Next.js |
 | Backend | Node.js / Python |
-| Blockchain | Solidity (EVM-compatible) or Rust (Solana) |
+| Blockchain | Solidity (EVM) — Coinbase Base or Polygon, Hardhat/Foundry |
 | AI/ML | Python, scikit-learn / PyTorch, LLM integration |
 | Database | PostgreSQL + on-chain state |
 | Infrastructure | Cloud (AWS/GCP), IPFS for metadata |
