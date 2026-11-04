@@ -100,6 +100,11 @@ Caveat: thin markets are noisy and manipulable, so the model must weight market 
 Token choice (see TOKENOMICS, Phase 5): settle in USDC for obligations; APLOV only for optional utility. If
 payouts are in a volatile token, collateral can fall below promised payouts.
 
-## 9. Contract list (MVP)
-APLOVToken, AppRegistry, ParticipationToken (ERC-1155), RevenueRegistry, PayoutVault, PredictionMarketFactory,
-PredictionMarket, PredictionOracle, Treasury. Interfaces and invariants are in the product spec; none are written yet.
+## 9. Contract list (implemented in `packages/contracts`)
+MockUSDC, APLOVToken, AppRegistry, ParticipationToken (ERC-1155), CrowdfundCampaign, RevenueRegistry, PayoutVault,
+PredictionMarketFactory, PredictionMarket, PredictionOracle, Treasury.
+
+Toolchain note: Foundry could not be installed in this environment, so the project uses Hardhat 3, which runs
+Foundry-style Solidity tests (forge-std, fuzz and invariant). The tests would port to `forge test` with remappings.
+
+Testing and review status: see `docs/AUDIT.md`.
