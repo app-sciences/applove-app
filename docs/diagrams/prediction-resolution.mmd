@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant User as User
+    participant Market as PredictionMarket
+    participant Oracle as Public Metrics Oracle
+    participant Apple as Apple Public Charts
+    participant Resolver as PredictionOracle
+    User->>Market: Buy simulated outcome position
+    Market->>Market: Lock collateral
+    Oracle->>Apple: Retrieve chart snapshot
+    Apple-->>Oracle: Return public ranking data
+    Oracle->>Oracle: Validate and preserve evidence
+    Oracle->>Resolver: Submit attestation
+    Resolver->>Resolver: Apply challenge / review rules
+    Resolver->>Market: Finalize outcome
+    User->>Market: Claim eligible payout
+    Market-->>User: Release simulated winnings

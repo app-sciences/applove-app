@@ -1,0 +1,21 @@
+sequenceDiagram
+    participant Admin as AppLove Admin
+    participant Token as ParticipationToken
+    participant Apple as App Store Connect
+    participant Oracle as Revenue Oracle
+    participant Registry as RevenueRegistry
+    participant Vault as PayoutVault
+    participant Holder as Participant
+    Admin->>Token: Create series and issue demo units
+    Token-->>Holder: Assign participation units
+    Oracle->>Apple: Request authorized reports
+    Apple-->>Oracle: Return financial data
+    Oracle->>Oracle: Normalize and validate
+    Oracle->>Registry: Submit authenticated attestation
+    Registry->>Registry: Validate and finalize after review
+    Admin->>Vault: Fund period with mock USDC
+    Vault->>Registry: Read finalized revenue record
+    Vault->>Token: Read eligible participation snapshot
+    Vault->>Vault: Allocate funded distribution
+    Holder->>Vault: Claim distribution
+    Vault-->>Holder: Transfer mock USDC

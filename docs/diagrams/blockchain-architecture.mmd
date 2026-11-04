@@ -1,0 +1,62 @@
+flowchart LR
+  subgraph STORES["App stores (off-chain, HTTP only)"]
+    AP["Apple public charts\n(RSS / Search API)"]
+    AC["App Store Connect\n(private sales + analytics)"]
+    GP["Google Play reports\n(Cloud Storage CSV)"]
+    GC["Licensed Google chart data"]
+  end
+
+  subgraph BACKEND["AppLove backend (Firebase Functions / Cloud Run)"]
+    DISC["Discovery service\nsnapshots + movement"]
+    ROR["Revenue oracle\nfetch, normalize, hash, evidence"]
+    POR["Public-metrics oracle\nchart snapshot, hash, evidence"]
+    EV[("Evidence store\nraw reports + hashes")]
+    AI["AI forecaster\ncustom model + market prices"]
+    KMS["KMS-held oracle signer key"]
+  end
+
+  subgraph CHAIN["Base (Sepolia for MVP)"]
+    REG["AppRegistry"]
+    RR["RevenueRegistry\nattestation, dispute window, finalize"]
+    PT["ParticipationToken\nERC-1155, one id per app series"]
+    PV["PayoutVault\nUSDC deposits, pull claims"]
+    PO["PredictionOracle\nattest, challenge, finalize"]
+    PF["PredictionMarketFactory"]
+    PM["PredictionMarket\nfully collateralized"]
+    AL["APLOV (ERC-20, demo)"]
+    TR["Treasury"]
+  end
+
+  subgraph USERS["People"]
+    DEV["Developer"]
+    INV["Participant / predictor\n(wallet)"]
+    FE["AppLove frontend"]
+  end
+
+  AP --> DISC
+  GC --> DISC
+  AP --> POR
+  AC --> ROR
+  GP --> ROR
+  ROR --> EV
+  POR --> EV
+  ROR -- "signed attestation" --> RR
+  POR -- "signed attestation" --> PO
+  KMS -. signs .-> ROR
+  KMS -. signs .-> POR
+  DISC --> AI
+  PM -. "market prices (read)" .-> AI
+  AI --> FE
+
+  DEV -- "USDC proceeds routed on-chain" --> PV
+  RR -- "finalized revenue" --> PV
+  PT -- "holder balances / snapshot" --> PV
+  PV -- "claim" --> INV
+  REG --> PT
+  PF --> PM
+  PO -- "final outcome" --> PM
+  AL --> PM
+  PM -- "fees" --> TR
+  INV -- "buy / sell / claim" --> PM
+  FE <--> CHAIN
+  FE <--> BACKEND

@@ -2,9 +2,10 @@
   "name": "@applove/shared",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "main": "src/index.ts",
   "scripts": {
-    "build": "echo 'TODO: setup'",
-    "test": "echo 'TODO: setup'"
+    "build": "echo 'no build step; TypeScript is run directly by Node 22+'",
+    "test": "node --experimental-strip-types --test test/*.test.ts"
   }
 }
