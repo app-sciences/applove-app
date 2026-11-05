@@ -39,10 +39,12 @@ Related docs: `spec.md` (product), `specs/contracts.md` (on-chain).
 | Styling | Tailwind CSS + CSS variables for theme tokens | |
 | Components | shadcn/ui (Radix) | Accessible primitives; we own the code |
 | Theming | `next-themes` | `light`, `dark`, `system`; no flash on load |
-| Auth | Auth.js (NextAuth v5) | Google provider + email one-time code |
-| Email | Resend (or any SMTP) | Sends login codes and waitlist confirmations |
+| Hosting | **Firebase App Hosting**, project **`appstake`** | Server-rendered Next.js on Cloud Run, deployed from the GitHub repo (see Hosting and Deployment) |
+| Auth | Auth.js (NextAuth v5) with the Firebase/Firestore adapter | Google provider + email one-time code. Firebase Auth's built-in email option is a link, not a code, so codes are handled by Auth.js |
+| Email | Firebase "Trigger Email from Firestore" extension (SMTP) or Resend | Sends login codes and waitlist confirmations |
 | Data (v1) | Typed mock data in `apps/web/src/data/*.ts` behind a repository interface | Swap for API/DB later without touching UI |
-| Persistence (v1) | SQLite via Prisma, only for users, sessions, waitlist and beta signups | Move to PostgreSQL later |
+| Persistence (v1) | **Cloud Firestore** (project `appstake`) for users, sessions, login codes, waitlist and beta signups | SQLite is not suitable for serverless hosting. Collections: `users`, `sessions`, `loginCodes`, `waitlist`, `betaSignups` |
+| Media | Firebase Storage (or `public/` for v1) | App images, videos, NFT art |
 | Carousel | Embla Carousel | Light, accessible, touch friendly |
 | Charts | Recharts (or visx) | Sparklines and projection bands |
 | Wallet (later) | wagmi + viem + RainbowKit, Base chain | Interface stubbed in v1 |
@@ -50,6 +52,19 @@ Related docs: `spec.md` (product), `specs/contracts.md` (on-chain).
 | Tests | Vitest (unit), Playwright (e2e smoke) | |
 
 Package lives in `apps/web` (`@applove/web`). Shared types go in `packages/shared`.
+
+---
+
+## Hosting and Deployment
+
+- **Platform**: Firebase **App Hosting** (the Firebase product for server-rendered Next.js), Firebase project ID **`appstake`**.
+- **Config files** in `apps/web`: `apphosting.yaml` (runtime, env vars, secrets), `firebase.json`, `.firebaserc` (default project `appstake`), `firestore.rules`, `firestore.indexes.json`.
+- **Deploy**: one App Hosting backend connected to the GitHub repo, root directory `apps/web`, live branch `main` (preview rollouts from other branches are optional). Because the repo is an npm workspaces monorepo, the build installs from the repo root so `packages/shared` resolves.
+- **Secrets** (Google OAuth client secret, Auth.js secret, `ANTHROPIC_API_KEY`, email credentials) live in Google Secret Manager and are referenced from `apphosting.yaml`. Never committed.
+- **Firestore rules**: the browser never reads or writes `loginCodes`, `sessions`, `waitlist` or `betaSignups` directly; only server route handlers (Admin SDK) do. Users may read only their own `users` document.
+- **Domains**: default `*.web.app` for beta; a custom domain can be attached in the Firebase console later.
+- **Environments**: local dev uses the Firebase Emulator Suite (Firestore + Auth) so no cloud access is needed to run the app.
+- **Requires from you**: Firebase project `appstake` on the Blaze plan (App Hosting requires it), access for the deploy, and a Google OAuth client for the login screen.
 
 ---
 
@@ -175,7 +190,7 @@ Coming Soon page. Short explainer ("A marketplace for stakes: buy, sell and swap
 ### 5. Beta signup
 
 - **BETA pill** in the nav opens a modal; the top banner and footer link there too; `/beta` exists as a plain page.
-- Form: email (required), name (optional), "I am a…" (investor / app developer / both), optional note. Stored in the `beta_signup` table. Confirmation email.
+- Form: email (required), name (optional), "I am a…" (investor / app developer / both), optional note. Stored in the `betaSignups` Firestore collection. Confirmation email.
 
 ### 6. About (`/about`)
 
@@ -356,7 +371,7 @@ All stats, funding, projections and images are **made-up demo values** and flagg
 
 | Slug | Name | What I know | Notes |
 |---|---|---|---|
-| `applove` | **Applove** | This platform itself | Fun meta-listing |
+| `applove` | **Applove** | This platform itself | Meta-listing, as you asked |
 | `shredinvaders` | **ShredInvaders** | Name only; no details found | Needs your description. Placeholder: retro arcade-style game |
 | `notedude` | **NoteDude** | Keyboard-first notes app with vi-style shortcuts, tags, MCP server; has a paid tier and a planned feature fundraiser | Most real: live web preview candidate |
 | `todude` | **ToDude** | Checklist / task companion to NoteDude (todo, in progress, done) | |
@@ -367,11 +382,9 @@ All stats, funding, projections and images are **made-up demo values** and flagg
 | `casualfax` | **CasualFax** | Fax app, no account needed, upfront price for large page counts, possibly MCP and marketplace listings | |
 | `lildude` | **LilDude** | Name only; a note mentions crowd-financing promotion | Needs description |
 | `pawndude` | **PawnDude** | Name only; a note mentions reclaiming and reselling items such as old wood doors | Needs description |
+| `eeglo` | **Eeglo** | Crowdsourced apartment search app | New. Needs more detail: how contributors share listings and what they get |
 
-Looked up and **not** used:
-- Linear and Notion only contain Trinsic work projects (CallSniper, TaskGlance, InstaAuth, etc.), which look like client or employer work, so I left them out.
-- **GoodDude** (vending plus micro-shelter) is a humanitarian infrastructure project, not an app, so it doesn't fit.
-- **App Sciences** appears as a consultancy/app studio ("AI is the new UI"), which is a natural developer entity.
+Only apps are listed; non-app projects are intentionally left out. **App Sciences** (a consultancy and app studio) is the natural developer entity.
 
 Please confirm the list and correct the guessed descriptions.
 
@@ -398,19 +411,20 @@ Please confirm the list and correct the guessed descriptions.
 | 3 | Are "NFTs" ERC-721 (one per stake) or ERC-1155 (per app, with quantity)? | One NFT per investment in the UI (a certificate). Contracts decide the format. |
 | 4 | Real developer for each placeholder app | App Sciences for all, plus two fake outside developers for the demo |
 | 5 | Preview hosting | Link to each app's own hosted web build in an iframe. NoteDude first. |
-| 6 | Email provider | Resend |
-| 7 | Hosting | Vercel for the beta |
+| 6 | Email provider | Firebase Trigger Email extension with SMTP, or Resend if you prefer |
+| 7 | Hosting | Settled: Firebase App Hosting, project `appstake` |
 | 8 | Brand: name styling and logo | "Applove" with a heart-in-app-tile mark; I'll draft it |
 
 ---
 
 ## Acceptance Criteria
 
+0. The app deploys to Firebase App Hosting in project `appstake` and serves over HTTPS.
 1. `npm run dev:web` starts the app; `npm run build` and `npm test` pass for `apps/web`.
 2. Home shows a working carousel with three boards (invested, revenue, downloads), each slide showing an AI revenue projection.
 3. Filters for category, stage, downloads, revenue, platform, sort and search all work, combine, persist in the URL, and show removable chips.
 4. Clicking a developer name from the carousel, a tile, an app page or a holding filters the home list to that developer.
-5. All 11 placeholder apps render in the grid and have a working detail page with at least one of preview / video / screenshots.
+5. All 12 placeholder apps render in the grid and have a working detail page with at least one of preview / video / screenshots.
 6. App page has the AI projection chart, the invest panel (APLOV), the buy-APLOV path, and the three perk tiers with the test-team explanation.
 7. Simulated invest flow creates a holding visible under **My investments** with value, earnings and a working (simulated) claim.
 8. Google login and email-code login both work in a configured environment; sessions persist; sign out works.
@@ -425,11 +439,11 @@ Please confirm the list and correct the guessed descriptions.
 ## Suggested Implementation Order
 
 1. Scaffold Next.js in `apps/web` with Tailwind, shadcn/ui, theme tokens and light/dark toggle.
-2. Shared types and the mock data repository with the 11 apps and 3 developers.
+2. Shared types and the mock data repository with the 12 apps and 3 developers.
 3. Layout: nav, beta banner, footer, Happy button (UI only).
 4. Home: carousel, filter bar (URL state), tile grid, developer filter.
 5. App detail page: preview/video/gallery, stats, projection chart, perks, invest panel.
-6. Auth (Google + email code) with Prisma/SQLite; waitlist and beta forms and API routes.
+6. Firebase setup (`apphosting.yaml`, Firestore rules, emulators), then auth (Google + email code) on Firestore; waitlist and beta forms and API routes.
 7. Buy APLOV flow and simulated invest; My investments page.
 8. Trade, About, How it works pages.
 9. Happy: SVG mascot, chat panel, `/api/happy` with Anthropic streaming and a mock fallback.
