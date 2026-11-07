@@ -12,8 +12,8 @@ export default function Home() {
   return (
     <>
       <section className="hero">
-        <h1>Fund the apps you believe in.<br />Share the profit.</h1>
-        <p className="muted">Buy a small stake in an app before it launches and earn a share of its revenue.</p>
+        <h1>Find cool apps by rockstar devs.<br />Join the testing team.<br />Share the profit.</h1>
+        <p className="muted">Your investment is protected by blockchain. Your NFT guarantees regular payouts as per app store reports. Optionally join the testing team for weekly updates, or meet the dev team directly.</p>
       </section>
       {sections.map((s) => (
         <section key={s.title} className="section">
