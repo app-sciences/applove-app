@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Applov — fund apps, share the profit",
+  title: "applov — fund apps, share the profit",
   description: "Stake-based crowdfunding for apps.",
   icons: { icon: "/logo-mark.png" },
 };
@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Header />
         <main>{children}</main>
-        <footer className="footer">© Applov · Invest in apps, share the upside.</footer>
+        <footer className="footer">© applov · Invest in apps, share the upside.</footer>
       </body>
     </html>
   );

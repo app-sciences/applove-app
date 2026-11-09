@@ -1,10 +1,10 @@
-export const metadata = { title: "How it works — Applov" };
+export const metadata = { title: "How it works — applov" };
 
 export default function How() {
   return (
 <div className="guide">
-<h1>How Applov works</h1>
-<p className="lead">Applov lets people fund apps before they launch. Investors buy a stake and receive an NFT. Developers get funded. Everyone shares the revenue the app earns.</p>
+<h1>How applov works</h1>
+<p className="lead">applov lets people fund apps before they launch. Investors buy a stake and receive an NFT. Developers get funded. Everyone shares the revenue the app earns.</p>
 
 <section id="g-investors" className="gsec">
 <h2>Guide for investors</h2>
@@ -12,7 +12,7 @@ export default function How() {
 <li><b>Find an app</b><span>Browse the gallery. Each app shows its phone preview, funding goal, the dev team, an AI revenue projection and a risk score. Many asks are under $1,000, with stakes starting at $10.</span></li>
 <li><b>Choose your amount</b><span>Pick how much you want to put in, at or above the app’s minimum. Your share of the app’s revenue is proportional to your stake.</span></li>
 <li><b>Invest</b><span>Check out like any online purchase. Your money is held safely until the app reaches its funding goal. If the goal is not reached by the deadline, you get your money back.</span></li>
-<li><b>Get your NFT</b><span>When the app is funded, you receive an NFT that proves your stake. Applov holds it for you, so there is nothing to set up or look after. Log in to Applov as an investor any time to see your NFT.</span></li>
+<li><b>Get your NFT</b><span>When the app is funded, you receive an NFT that proves your stake. applov holds it for you, so there is nothing to set up or look after. Log in to applov as an investor any time to see your NFT.</span></li>
 <li><b>Watch your earnings</b><span>Once the app earns, payouts are calculated from the official app store revenue reports and paid out regularly. Log in to see your payouts, total earnings and how each app is doing.</span></li>
 </ol>
 <div className="callout">
@@ -36,7 +36,7 @@ export default function How() {
 
 <section id="g-routing" className="gsec">
 <h2>How app revenue is routed</h2>
-<p>Every funded app must send its app store earnings through Applov’s financial routing mechanism. This is a requirement for listing, and it is what lets investor payouts be guaranteed instead of depending on the developer to pay out by hand.</p>
+<p>Every funded app must send its app store earnings through applov’s financial routing mechanism. This is a requirement for listing, and it is what lets investor payouts be guaranteed instead of depending on the developer to pay out by hand.</p>
 <div className="flow" role="img" aria-label="App store revenue goes to the revenue router, which pays NFT holders, the developer and a platform fee">
 <div className="fl-box"><b>App stores</b><span>iOS, Google Play, Chrome and others</span></div>
 <div className="fl-arrow" aria-hidden="true">→</div>
@@ -52,15 +52,15 @@ export default function How() {
 <li>The developer points the app’s store payouts at the router when setting up the campaign.</li>
 <li>App store revenue reports act as the source of truth. The router reads them and calculates each payout.</li>
 <li>Payouts are split automatically on a regular schedule, for example monthly, with no manual step.</li>
-<li>Every payout is recorded on the blockchain, and investors see it in their Applov account.</li>
+<li>Every payout is recorded on the blockchain, and investors see it in their applov account.</li>
 </ul>
 </section>
 
 <section id="g-nft" className="gsec">
 <h2>Your NFT</h2>
-<p>Each stake is represented by an NFT. It records how much of the app you own and entitles you to your share of every payout. Applov holds it on your behalf, and you can view it, along with all related earnings information, by logging in as an investor.</p>
+<p>Each stake is represented by an NFT. It records how much of the app you own and entitles you to your share of every payout. applov holds it on your behalf, and you can view it, along with all related earnings information, by logging in as an investor.</p>
 <ul className="plain">
-<li><b>Nothing to manage:</b> there are no wallets or extra accounts to set up. Your Applov login is all you need.</li>
+<li><b>Nothing to manage:</b> there are no wallets or extra accounts to set up. Your applov login is all you need.</li>
 <li><b>Eventually tradeable:</b> a marketplace for buying and selling NFTs is planned, so you will be able to exit early or buy into an app that is already earning. It is not live yet.</li>
 <li>Whoever owns the NFT receives the payouts, so a trade moves the future revenue share with it.</li>
 </ul>
@@ -68,7 +68,7 @@ export default function How() {
 
 <section id="g-aplov" className="gsec">
 <h2>APLOV, the app currency</h2>
-<p>APLOV is the native currency of the Applov ecosystem. Developers who pay in APLOV can get discounted hosting and infrastructure services for their apps.</p>
+<p>APLOV is the native currency of the applov ecosystem. Developers who pay in APLOV can get discounted hosting and infrastructure services for their apps.</p>
 <ul className="plain">
 <li><b>What it covers:</b> hosting, cloud and other backend infrastructure an app needs to run.</li>
 <li><b>Who benefits:</b> developers, who lower their running costs, and investors, since lower costs leave more revenue to share.</li>
