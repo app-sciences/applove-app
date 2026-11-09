@@ -1,8 +1,8 @@
-# Applove - Product Specification
+# Applov - Product Specification
 
 ## 1. Overview
 
-**Product Name:** Applove
+**Product Name:** Applov
 **Type:** Blockchain-driven, stake-based crowdfunding platform
 **Concept:** Investors fund app development by purchasing profit-share stakes. Contracts and fund distribution are managed via smart contracts. App stores serve as oracles for revenue verification. AI-powered profit prediction engine assists investment decisions.
 **Analogous To:** Blockchain-based StartEngine.com, scoped to app/extension development.

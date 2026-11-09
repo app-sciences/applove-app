@@ -1,5 +1,5 @@
 {
-  "name": "applove",
+  "name": "applov",
   "private": true,
   "workspaces": [
     "apps/*",

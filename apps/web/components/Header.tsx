@@ -8,7 +8,7 @@ export default function Header() {
         <Link href="/" className="brand">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo-mark.png" alt="" height={36} />
-          <span>applove</span>
+          <span>applov</span>
         </Link>
         <nav className="nav">
           <Link href="/">Explore</Link>

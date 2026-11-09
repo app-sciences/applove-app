@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 
 type Mode = "system" | "light" | "dark";
-const KEY = "applove-theme";
+const KEY = "applov-theme";
 
 function apply(mode: Mode) {
   const dark = mode === "dark" || (mode === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
