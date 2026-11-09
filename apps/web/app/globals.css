@@ -86,7 +86,7 @@ dl{margin:0}dl div{display:flex;justify-content:space-between;padding:8px 0;bord
 .car-wrap{position:relative;margin-top:14px}
 .rail{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 18px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
 .slide{flex:0 0 min(880px,90%);scroll-snap-align:start;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;min-width:0}
-.slide-phone{display:flex;align-items:center;justify-content:center;padding:18px 30px}.slide-phone .phone{width:clamp(170px,calc((100svh - 290px) * .4737),270px)!important}
+.slide-phone{display:flex;align-items:center;justify-content:center;padding:18px 30px}.slide-phone .phone{width:clamp(170px,calc((100svh - 350px) * .4737),270px)!important}
 .slide-info{padding:20px 24px 18px 0;display:flex;flex-direction:column;min-width:0}
 .slide-info h2{font-size:28px;margin:6px 0 2px;letter-spacing:-.5px}.slide-desc{margin:0 0 4px}
 .car-btn{position:absolute;top:50%;transform:translateY(-60%);z-index:5;width:46px;height:46px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:26px;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)}
@@ -109,3 +109,38 @@ dl{margin:0}dl div{display:flex;justify-content:space-between;padding:8px 0;bord
  .slide-phone{padding:18px 0 8px}.slide-phone .phone{width:min(230px,62vw)!important}.slide-info{padding:8px 20px 22px}
  .car-btn{display:none}
 }
+
+/* compact invest box: amount + button on one row */
+.invest{grid-template-columns:minmax(0,1fr) auto;align-items:end}
+.invest>*{min-width:0}
+.invest .quick,.invest .invest-ok{grid-column:1/-1}
+.invest .own{grid-column:1/-1;order:5}
+.invest .amt>span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.invest .amt input{height:44px;padding:0 12px}
+.invest .btn{width:auto;height:44px;padding:0 24px;margin:0}
+.dates label{min-width:0}.dates input{min-width:0;width:100%;padding:0 6px!important}
+
+/* browse toolbar + filters */
+.tbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.tbar input[type=search],.tbar select,.fbtn{height:40px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;font-size:14px;padding:0 14px}
+.tbar input[type=search]{flex:1 1 180px;min-width:0}
+.tbar select{cursor:pointer}
+.fbtn{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:600}
+.fbtn[aria-expanded="true"],.fbtn.has{border-color:var(--brand);color:var(--brand)}
+.badge{min-width:20px;height:20px;border-radius:99px;background:var(--brand);color:#fff;font-size:12px;display:inline-grid;place-items:center;padding:0 6px}
+.badge[hidden]{display:none}
+.count{margin-left:auto;color:var(--muted);font-size:14px;white-space:nowrap}
+.fpanel{margin-top:10px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px 26px;box-shadow:var(--shadow)}
+.fpanel[hidden]{display:none}
+.fg h4{margin:0 0 8px;font-size:13px;color:var(--muted);font-weight:600;letter-spacing:.3px;text-transform:uppercase}
+.fg select,.fg input[type=date]{width:100%;height:38px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);font:inherit;font-size:14px;padding:0 10px}
+.fchips{display:flex;flex-wrap:wrap;gap:6px}
+.fchip{padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--bg);color:var(--text);font:inherit;font-size:14px;cursor:pointer}
+.fchip[aria-pressed="true"]{border-color:var(--brand);background:var(--brand);color:#fff;font-weight:600}
+.dates{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dates label{display:grid;gap:3px;font-size:12px;color:var(--muted)}
+.fact{grid-column:1/-1;display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--border);padding-top:14px}
+.fact button{font:inherit;font-weight:600;border-radius:10px;padding:8px 16px;cursor:pointer}
+.fact .clr{background:none;border:1px solid var(--border);color:var(--text)}
+.fact .done{background:var(--brand);border:1px solid var(--brand);color:#fff}
+.empty{margin:40px 0;text-align:center;color:var(--muted)}.empty button{margin-top:8px}

@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import PhoneFrame from "./PhoneFrame";
-import { projects, usd, type Project } from "@/lib/projects";
+import { usd, type Project } from "@/lib/projects";
 
 type Live = Record<string, { mine: number; inv: number }>;
 const own = (x: number, p: Project) => ((x / p.targetAmount) * 100).toFixed(2);
@@ -65,7 +65,7 @@ function Slide({ p, live, onInvest }: { p: Project; live?: { mine: number; inv: 
   );
 }
 
-export default function Showcase() {
+export default function Showcase({ list }: { list: Project[] }) {
   const [live, setLive] = useState<Live>({});
   const rail = useRef<HTMLDivElement>(null);
 
@@ -82,7 +82,7 @@ export default function Showcase() {
     <div className="car-wrap">
       <button className="car-btn prev" aria-label="Previous app" onClick={() => go(-1)}>‹</button>
       <div className="rail" ref={rail} tabIndex={0} aria-label="Featured apps">
-        {projects.map((p) => <Slide key={p.id} p={p} live={live[p.id]} onInvest={invest} />)}
+        {list.map((p) => <Slide key={p.id} p={p} live={live[p.id]} onInvest={invest} />)}
       </div>
       <button className="car-btn next" aria-label="Next app" onClick={() => go(1)}>›</button>
     </div>
