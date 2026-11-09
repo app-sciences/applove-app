@@ -182,3 +182,6 @@ dl{margin:0}dl div{display:flex;justify-content:space-between;padding:8px 0;bord
 .tbl th,.tbl td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);font-size:14px}.tbl th{color:var(--muted);font-weight:600}.tbl td:last-child,.tbl th:last-child{text-align:right;font-variant-numeric:tabular-nums}
 .tbl tr:last-child td{border-bottom:0}
 .footer a{text-decoration:underline}
+
+.fbtn{position:relative;width:40px;padding:0!important;justify-content:center;gap:0}
+.fbtn .badge{position:absolute;top:-6px;right:-6px;border:2px solid var(--bg)}

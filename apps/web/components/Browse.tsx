@@ -84,17 +84,20 @@ export default function Browse() {
   return (
     <>
       <div className="tbar">
-        <input type="search" placeholder="Search apps" aria-label="Search apps" value={f.q} onChange={(e) => set("q", e.target.value)} />
+        <select aria-label="Sort by" value={f.sort} onChange={(e) => set("sort", e.target.value)}>
+          {SORT.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+        </select>
         <select aria-label="Category" value={f.cat} onChange={(e) => set("cat", e.target.value)}>
           <option value="all">All categories</option>
           {categories.map((c) => <option key={c}>{c}</option>)}
         </select>
-        <button className={"fbtn" + (n ? " has" : "")} aria-expanded={open} aria-controls="fpanel" onClick={() => setOpen(!open)}>
-          <span aria-hidden>⚙</span> Filters {n > 0 && <span className="badge">{n}</span>}
+        <input type="search" placeholder="Search apps" aria-label="Search apps" value={f.q} onChange={(e) => set("q", e.target.value)} />
+        <button className={"fbtn" + (n ? " has" : "")} aria-label="Filters" title="Filters" aria-expanded={open} aria-controls="fpanel" onClick={() => setOpen(!open)}>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+            <path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1" /><circle cx="15" cy="6" r="2" /><circle cx="9" cy="12" r="2" /><circle cx="17" cy="18" r="2" />
+          </svg>
+          {n > 0 && <span className="badge">{n}</span>}
         </button>
-        <select aria-label="Sort by" value={f.sort} onChange={(e) => set("sort", e.target.value)}>
-          {SORT.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
-        </select>
         <span className="count" aria-live="polite">{list.length} {list.length === 1 ? "app" : "apps"}</span>
       </div>
 
