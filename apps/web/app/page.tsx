@@ -1,3 +1,4 @@
+import Showcase from "@/components/Showcase";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/lib/projects";
 
@@ -15,6 +16,7 @@ export default function Home() {
         <h1>Find cool apps by rockstar devs.<br />Join the testing team.<br />Share the profit.</h1>
         <p className="muted">Your investment is protected by blockchain. Your NFT guarantees regular payouts as per app store reports. Optionally join the testing team for weekly updates, or meet the dev team directly.</p>
       </section>
+      <Showcase />
       {sections.map((s) => (
         <section key={s.title} className="section">
           <h2>{s.title}</h2>
