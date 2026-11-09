@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Header />
         <main>{children}</main>
-        <footer className="footer">© applov · Invest in apps, share the upside.</footer>
+        <footer className="footer"><a href="/how-it-works">How it works</a> · © applov · Invest in apps, share the upside.</footer>
       </body>
     </html>
   );

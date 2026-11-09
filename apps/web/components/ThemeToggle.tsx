@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { MoonIcon, SunIcon, SystemIcon } from "@/lib/icons";
 
 type Mode = "system" | "light" | "dark";
 const KEY = "applov-theme";
@@ -10,10 +11,10 @@ function apply(mode: Mode) {
   document.documentElement.dataset.mode = mode;
 }
 
-const options: { mode: Mode; label: string; icon: string }[] = [
-  { mode: "light", label: "Light", icon: "☀️" },
-  { mode: "system", label: "System", icon: "💻" },
-  { mode: "dark", label: "Dark", icon: "🌙" },
+const options: { mode: Mode; label: string; icon: React.ReactNode }[] = [
+  { mode: "light", label: "Light", icon: <SunIcon /> },
+  { mode: "system", label: "System", icon: <SystemIcon /> },
+  { mode: "dark", label: "Dark", icon: <MoonIcon /> },
 ];
 
 export default function ThemeToggle() {
@@ -55,15 +56,13 @@ export default function ThemeToggle() {
   const cur = options.find((o) => o.mode === mode)!;
   return (
     <div className="theme" ref={box}>
-      <button className="theme-btn" aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen(!open)}>
-        <span aria-hidden>{cur.icon}</span>
-        <span className="lbl">{cur.label}</span>
-        <span className="car" aria-hidden>▾</span>
+      <button className="theme-btn" aria-haspopup="menu" aria-expanded={open} aria-label={`Theme: ${cur.label}`} title={`Theme: ${cur.label}`} onClick={() => setOpen(!open)}>
+        <span className="ico">{cur.icon}</span>
       </button>
       <div className="theme-menu" role="menu" hidden={!open}>
         {options.map((o) => (
           <button key={o.mode} role="menuitemradio" aria-checked={mode === o.mode} onClick={() => choose(o.mode)}>
-            <span aria-hidden>{o.icon}</span>
+            <span className="ico">{o.icon}</span>
             {o.label}
             <span className="ck" aria-hidden>✓</span>
           </button>

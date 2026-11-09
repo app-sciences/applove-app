@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
+import AccountMenu from "./AccountMenu";
 
 export default function Header() {
   return (
@@ -10,12 +11,10 @@ export default function Header() {
           <img src="/logo-mark.png" alt="" height={36} />
           <span>applov</span>
         </Link>
-        <nav className="nav">
-          <Link href="/">Explore</Link>
-          <Link href="/start">Start a project</Link>
-          <Link href="/how-it-works">How it works</Link>
-        </nav>
-        <ThemeToggle />
+        <div className="hdr-right">
+          <ThemeToggle />
+          <AccountMenu />
+        </div>
       </div>
     </header>
   );
