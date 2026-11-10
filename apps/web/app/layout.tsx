@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import InvestProvider from "@/components/InvestProvider";
 import Header from "@/components/Header";
 import "./globals.css";
 
@@ -18,9 +19,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
       <body>
+        <InvestProvider>
         <Header />
         <main>{children}</main>
-        <footer className="footer"><a href="/how-it-works">How it works</a> · © applov · Invest in apps, share the upside.</footer>
+        </InvestProvider>
+        <footer className="footer"><a href="/how-it-works">How it works</a> · <a href="/start">Submit your app</a> · © applov · Invest in apps, share the upside.</footer>
       </body>
     </html>
   );

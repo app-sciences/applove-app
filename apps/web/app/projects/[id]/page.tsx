@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import InvestButton from "@/components/InvestButton";
 import PhoneFrame from "@/components/PhoneFrame";
 import { getProject, projects, usd, pct } from "@/lib/projects";
 
@@ -33,9 +34,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           <div><dt>Minimum investment</dt><dd>{usd(p.minInvestment)}</dd></div>
           <div><dt>✨ AI projected 3-yr revenue</dt><dd>{usd(p.projectedRevenue)}</dd></div>
         </dl>
-        <button className="btn" disabled={p.status === "funded"}>
-          {p.status === "funded" ? "Fully funded" : "Invest now"}
-        </button>
+        <InvestButton app={p.name} amount={p.minInvestment} disabled={p.status === "funded"} label={p.status === "funded" ? "Fully funded" : "Invest now"} />
         {p.status === "active" && <p className="warn">Offering closes in {p.daysLeft} days</p>}
         {p.status === "upcoming" && <p className="muted">Opening soon</p>}
       </aside>

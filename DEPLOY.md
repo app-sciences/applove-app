@@ -23,3 +23,26 @@ The workflow can also be run by hand from the Actions tab.
 ## Runtime settings
 
 CPU, memory and instance limits are in `apps/web/apphosting.yaml`.
+
+## Data the app writes (Firestore)
+
+Two server-side API routes write to Firestore in `appstake-5a80f`:
+
+| Route | Collection | What it stores |
+| --- | --- | --- |
+| `POST /api/notify` | `waitlist` | Email addresses from the "Investing opens soon" dialog (one document per address). |
+| `POST /api/submissions` | `submissions` | Developer app submissions, saved with `status: "pending"` for review. |
+
+Setup:
+
+1. Make sure Firestore is enabled in the project (it was used by the earlier
+   appstake app, so it probably is).
+2. On App Hosting the app uses its default service account, which can write
+   through the Admin SDK. Locally, run
+   `gcloud auth application-default login` (or set
+   `GOOGLE_APPLICATION_CREDENTIALS`) to try the routes.
+3. Only the server writes these collections. Check the project's Firestore
+   rules so browsers cannot read or write `waitlist` and `submissions`
+   directly.
+
+Nothing reviews submissions yet. Read them in the Firebase console.

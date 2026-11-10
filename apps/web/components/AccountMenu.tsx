@@ -35,10 +35,14 @@ export default function AccountMenu() {
           <>
             <div className="menu-head">{session.email}</div>
             <button role="menuitem" onClick={() => go("/portfolio")}>Portfolio</button>
+            <button role="menuitem" onClick={() => go("/start")}>Submit an app</button>
             <button role="menuitem" onClick={() => { saveSession(null); window.location.assign("/"); }}>Log out</button>
           </>
         ) : (
-          <button role="menuitem" onClick={() => go("/login")}>Log in</button>
+          <>
+            <button role="menuitem" onClick={() => go("/login")}>Log in</button>
+            <button role="menuitem" onClick={() => go("/start")}>Submit an app</button>
+          </>
         )}
       </div>
     </div>
