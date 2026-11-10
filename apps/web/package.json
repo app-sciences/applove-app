@@ -3,8 +3,20 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "echo 'TODO: setup'",
-    "build": "echo 'TODO: setup'",
-    "test": "echo 'TODO: setup'"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo 'no tests yet'"
+  },
+  "dependencies": {
+    "next": "^16.4.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^7.0.2"
   }
 }
