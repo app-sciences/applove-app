@@ -42,9 +42,10 @@ const seeds = [
   ["Shred Invaders", "Arcade fitness fun", "A retro arcade shooter where your real-world workouts power your ship.", "Gaming", "👾", 285, false],
   ["TripPocket", "Offline travel companion", "Offline maps, itineraries and local tips that work with zero signal.", "Travel & Local", "🧭", 200, true],
   ["FocusFox", "Deep work, gamified", "A pomodoro focus timer that grows a tiny forest as you stay on task.", "Productivity", "🦊", 25, false],
+  ["note_dude", "Notes at the speed of thought", "A keyboard-driven notes app with tags, instant search and a daily task list.", "Productivity", "📝", 255, false],
 ] as const;
 
-const statuses: Project["status"][] = ["active", "active", "active", "funded", "upcoming", "active", "active", "active"];
+const statuses: Project["status"][] = ["active", "active", "active", "funded", "upcoming", "active", "active", "active", "active"];
 
 const extra: Record<string, { platforms: string[]; launchDate: string; risk: Project["risk"]; testTeam: boolean }> = {
   "FitTrack Pro": { platforms: ["iOS", "Android"], launchDate: "2027-02-15", risk: "Medium", testTeam: true },
@@ -55,6 +56,7 @@ const extra: Record<string, { platforms: string[]; launchDate: string; risk: Pro
   "Shred Invaders": { platforms: ["iOS", "Android"], launchDate: "2027-01-05", risk: "Medium", testTeam: true },
   TripPocket: { platforms: ["iOS", "Android"], launchDate: "2027-03-12", risk: "Low", testTeam: true },
   FocusFox: { platforms: ["Chrome", "Web"], launchDate: "2026-12-20", risk: "Low", testTeam: false },
+  note_dude: { platforms: ["iOS", "Android"], launchDate: "2027-02-28", risk: "Medium", testTeam: true },
 };
 
 export const projects: Project[] = seeds.map(([name, tagline, description, category, emoji, hue, small], i) => {
@@ -74,7 +76,7 @@ export const projects: Project[] = seeds.map(([name, tagline, description, categ
     category,
     emoji,
     hue,
-    screenshot: name === "Shred Invaders" ? "/shred-invaders.jpg" : undefined,
+    screenshot: ({ "Shred Invaders": "/shred-invaders.jpg", note_dude: "/note-dude.png" } as Record<string, string>)[name],
     targetAmount: target,
     raisedAmount: raised,
     status,
