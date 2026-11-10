@@ -1,0 +1,22 @@
+# Firebase App Hosting config for the Applove web app.
+# Docs: https://firebase.google.com/docs/app-hosting/configure
+runConfig:
+  cpu: 1
+  memoryMiB: 512
+  minInstances: 0
+  maxInstances: 5
+  concurrency: 80
+
+# Non-secret environment variables.
+env:
+  - variable: NEXT_PUBLIC_APP_NAME
+    value: Applove
+    availability:
+      - BUILD
+      - RUNTIME
+
+# Secrets live in Google Secret Manager, never in git. Add them later, e.g.:
+#  - variable: AUTH_SECRET
+#    secret: auth-secret
+#  - variable: ANTHROPIC_API_KEY
+#    secret: anthropic-api-key
