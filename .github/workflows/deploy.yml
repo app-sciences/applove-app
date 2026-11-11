@@ -20,5 +20,5 @@ jobs:
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          projectId: applove-app-dev
+          projectId: appstake-5a80f
           channelId: live
