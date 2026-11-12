@@ -14,7 +14,7 @@ builds pull requests so a broken change is caught before it reaches `main`.
 ## One-time setup
 
 In the Firebase console (project `appstake-5a80f` → App Hosting) create a
-backend with ID `applov`, root directory `apps/web`, live branch `main`, and
+backend with ID `applove-app`, root directory `apps/web`, live branch `main`, and
 automatic rollouts on. If you choose a different backend ID, update `backendId`
 in `firebase.json` (only used when deploying from the CLI).
 
