@@ -1,0 +1,25 @@
+name: CI
+
+# Deploys are handled by Firebase App Hosting, which builds and rolls out
+# from `main` on its own. This workflow only checks that changes build.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Typecheck and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit -p apps/web
+      - run: npm run build -w @applov/web
