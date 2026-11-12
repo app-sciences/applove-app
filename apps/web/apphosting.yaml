@@ -1,0 +1,8 @@
+# Firebase App Hosting runtime settings for the applov web app.
+# https://firebase.google.com/docs/app-hosting/configure
+runConfig:
+  cpu: 1
+  memoryMiB: 512
+  minInstances: 0
+  maxInstances: 2
+  concurrency: 80
